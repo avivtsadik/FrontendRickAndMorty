@@ -51,9 +51,6 @@ const SearchBar: React.FC<ISearchContext> = ({
   setFilterText,
   authCompleteData,
 }) => {
-  const handleInputChange = (event: React.ChangeEvent<{}>, value: string) => {
-    setFilterText(value);
-  };
   return (
     <Search>
       <SearchIconWrapper>
@@ -61,7 +58,9 @@ const SearchBar: React.FC<ISearchContext> = ({
       </SearchIconWrapper>
       <Autocomplete
         freeSolo
-        onInputChange={handleInputChange}
+        onInputChange={(event: React.ChangeEvent<{}>, value: string) =>
+          setFilterText(value)
+        }
         options={authCompleteData}
         renderInput={(params) => (
           <StyledInputBase
