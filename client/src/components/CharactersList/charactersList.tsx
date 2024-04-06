@@ -36,7 +36,7 @@ const CharacterList: React.FC = () => {
     setFilterText,
     authCompleteData
   } = useCharactersList();
-  
+
   if (status === "error" && error) {
     enqueueSnackbar("An error has occurred " + error.message, {
       variant: "error",
@@ -59,7 +59,7 @@ const CharacterList: React.FC = () => {
               columns={{ xs: 2, sm: 6, md: 12, lg: 12 }}
             >
               {data.pages.map((group, i) =>
-                group.data.map((data: ICharactersProps, index: number) => {
+                group?.data.map((data: ICharactersProps, index: number) => {
                   return (
                     <Grid
                       key={data.id + "" + index}

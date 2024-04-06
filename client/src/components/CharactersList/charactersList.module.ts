@@ -25,11 +25,14 @@ export const useCharactersList = () => {
     status,
   } = useInfiniteQuery({
     queryKey: ["characters", debouncedValue],
-    queryFn: (pageParam) => fetchData(pageParam, debouncedValue, isAdmin, setAuthCompleteData),
+    queryFn: (pageParam) =>
+      fetchData(pageParam, debouncedValue, isAdmin, setAuthCompleteData),
     getNextPageParam: (lastPage) => {
-      return lastPage.nextCursor;
+      return lastPage?.nextCursor;
     },
     initialPageParam: 1,
+    retry: false,
+    staleTime: Infinity,
   });
   return {
     data,
@@ -40,6 +43,6 @@ export const useCharactersList = () => {
     status,
     setFilterText,
     filterText,
-    authCompleteData
+    authCompleteData,
   };
 };
