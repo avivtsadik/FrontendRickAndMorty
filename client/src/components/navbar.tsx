@@ -6,7 +6,12 @@ import { useUserContext } from "../context/userContext/userContext";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
-  const { role,setRole } = useUserContext();
+  const { role, setRole } = useUserContext();
+  const handleLogout = React.useCallback(() => {
+    setRole(Roles.UNAUTHORISED);
+    navigate(RouteValues.LOGIN_PAGE);
+  }, [navigate, setRole]);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -21,12 +26,9 @@ const NavBar: React.FC = () => {
               Rick And Morty
             </Typography>
             <Button
-              sx={{ ml: 2,textTransform: 'none' }}
+              sx={{ ml: 2, textTransform: "none" }}
               color="inherit"
-              onClick={() => {
-                setRole(Roles.UNAUTHORISED);
-                navigate(RouteValues.LOGIN_PAGE);
-              }}
+              onClick={handleLogout}
             >
               Logout - ({role})
             </Button>

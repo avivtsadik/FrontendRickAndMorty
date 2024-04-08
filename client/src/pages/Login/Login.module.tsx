@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Roles, RouteValues} from "../../utils/generalEnums";
+import { Roles, RouteValues } from "../../utils/generalEnums";
 import { useUserContext } from "../../context/userContext/userContext";
 import { useSnackbar } from "notistack";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { UsersMap } from "../../utils/mockData";
 
 const useLogin = () => {
@@ -12,18 +12,18 @@ const useLogin = () => {
   const { setRole } = useUserContext();
   const { enqueueSnackbar } = useSnackbar();
 
-  const LoginUser = (
-    username: string | undefined,
-    password: string | undefined
-  ) => {
-    if (UsersMap.get(username as Roles) === password) {
-      setRole(username as Roles);
-      navigate(RouteValues.HOME_PAGE);
-      enqueueSnackbar("Successfull login :)", { variant: "success" });
-    } else {
-      enqueueSnackbar("Incorrect credentials :(", { variant: "error" });
-    }
-  };
+  const LoginUser = useCallback(
+    (username: string | undefined, password: string | undefined) => {
+      if (UsersMap.get(username as Roles) === password) {
+        setRole(username as Roles);
+        navigate(RouteValues.HOME_PAGE);
+        enqueueSnackbar("Successfull login :)", { variant: "success" });
+      } else {
+        enqueueSnackbar("Incorrect credentials :(", { variant: "error" });
+      }
+    },
+    [setRole, enqueueSnackbar, navigate]
+  );
 
   return {
     usernameRef,

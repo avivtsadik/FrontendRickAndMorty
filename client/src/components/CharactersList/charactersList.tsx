@@ -1,17 +1,11 @@
 import * as React from "react";
-import {
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import Character, { ICharacterProps } from "../character";
 import { useCharactersList } from "./charactersList.module";
 import { enqueueSnackbar } from "notistack";
 import Loader from "../loader";
 import SearchBar from "../searchBar";
-
+import "./charactersList.css";
 const containerCharacterListSx = {
   padding: "20px",
   boxShadow: "10",
@@ -34,7 +28,7 @@ const CharacterList: React.FC = () => {
     status,
     filterText,
     setFilterText,
-    authCompleteData
+    authCompleteData,
   } = useCharactersList();
 
   if (status === "error" && error) {
@@ -52,7 +46,7 @@ const CharacterList: React.FC = () => {
       />
       <Loader isLoading={status === "pending"}>
         {data ? (
-          <Container sx={containerCharacterListSx}>
+          <Container sx={containerCharacterListSx} className="searchBar">
             <Grid
               container
               spacing={{ xs: 2, md: 3 }}
