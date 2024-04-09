@@ -7,32 +7,32 @@ const rickMortySchema: Schema = new Schema({
     type: String,
     required: true,
   },
-//   image: {
-//     type: String,
-//     required: true,
-//   },
-//   numOfEpisodes: {
-//     type: [String],
-//     required: true,
-//   },
-//   currentLocation: {
-//     type: String,
-//     required: true,
-//   },
-//   status: {
-//     type: String,
-//     enum: StatusValues,
-//     default: StatusValues.ALIVE,
-//     required: true,
-//   },
-//   species: {
-//     type: String,
-//     required: true,
-//   },
+  image: {
+    type: String,
+    required: true,
+  },
+  episodes: {
+    type: [String],
+    required: true,
+  },
+  currentLocation: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: StatusValues,
+    default: StatusValues.ALIVE,
+    required: true,
+  },
+  species: {
+    type: String,
+    required: true,
+  },
 });
 
 const rickMortyModel = model<IRickMorty & Document>(
-  "rickMortySchema",
+  "rickMorty",
   rickMortySchema
 );
 

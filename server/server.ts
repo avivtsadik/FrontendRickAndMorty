@@ -3,6 +3,7 @@ import { SERVER_PORT } from "./src/config";
 import { logMessage } from "./src/utils/logger";
 const server: Server = new Server();
 const PORT: number = SERVER_PORT ? parseInt(SERVER_PORT) : 3000;
+import 'reflect-metadata';
 
 server.app
   .listen(PORT, "localhost", function () {
