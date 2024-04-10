@@ -1,4 +1,4 @@
-import { cleanEnv, port, str } from 'envalid';
+import { cleanEnv, num, port, str } from 'envalid';
 import { config } from 'dotenv';
 config();
 
@@ -7,6 +7,7 @@ const validateEnv = () => {
     SERVER_URL: str(),
     SERVER_PORT: port(),
     MONGO_CONNECTION_STRING: str(),
+    LIMIT_PAGINATED_REQ: num(),
   });
 };
 

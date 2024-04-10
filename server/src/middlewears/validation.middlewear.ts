@@ -7,8 +7,8 @@ const validationMiddleware = (
   type: any,
   value: string | "body" | "query" | "params" = "body",
   skipMissingProperties = false,
-  whitelist = true,
-  forbidNonWhitelisted = true
+  whitelist = false,
+  forbidNonWhitelisted = false
 ): RequestHandler => {
   return (req, res, next) => {
     const dataArray = Array.isArray(req[value]) ? req[value] : [req[value]];

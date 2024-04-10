@@ -6,6 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import Loader from "../loader";
 import SearchBar from "../searchBar";
 import "./charactersList.css";
+import { useMemo } from "react";
 const containerCharacterListSx = {
   padding: "20px",
   boxShadow: "10",
@@ -28,7 +29,7 @@ const CharacterList: React.FC = () => {
     status,
     filterText,
     setFilterText,
-    authCompleteData,
+    authCompleteData
   } = useCharactersList();
 
   if (status === "error" && error) {

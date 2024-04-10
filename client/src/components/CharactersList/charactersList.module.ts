@@ -12,7 +12,6 @@ export interface ICharactersProps extends ICharacterProps {
 
 export const useCharactersList = () => {
   const [filterText, setFilterText] = useState("");
-  const [authCompleteData, setAuthCompleteData] = useState<string[]>([]);
   const { role } = useUserContext();
   const debouncedValue = useDebounce(filterText, 500);
   const isAdmin = useMemo(() => role === Roles.ADMIN, [role]);
@@ -26,7 +25,7 @@ export const useCharactersList = () => {
   } = useInfiniteQuery({
     queryKey: ["characters", debouncedValue],
     queryFn: (pageParam) =>
-      fetchData(pageParam, debouncedValue, isAdmin, setAuthCompleteData),
+      fetchData(pageParam, debouncedValue, isAdmin, false),
     getNextPageParam: (lastPage) => {
       return lastPage?.nextCursor;
     },
@@ -34,6 +33,19 @@ export const useCharactersList = () => {
     retry: false,
     staleTime: Infinity,
   });
+
+  const authCompleteData = useMemo(() => {
+    const dataRetrived =
+      data?.pages.map((group) =>
+        group?.data.map((data: ICharactersProps) => data.name)
+      ) ?? [];
+    const authCompleteData3 = dataRetrived
+      .flat()
+      .filter((name): name is string => typeof name === "string");
+    const authCompleteData4 = Array.from(new Set(authCompleteData3));
+    return authCompleteData4;
+  }, [data]);
+
   return {
     data,
     error,

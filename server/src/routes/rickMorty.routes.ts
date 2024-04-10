@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { RickMortyController } from "../controllers/rickMorty.controller";
 import validationMiddleware from "../middlewears/validation.middlewear";
-import { InsertRickMortyDto } from "../dtos/rickMorty.dto";
+import { InsertRickMortyDto } from "../dtos/InsertrickMorty.dto";
+import { GetRickMortyDto } from "../dtos/GetrickMorty.dto";
 
 class RickMortyRoutes {
   public router: Router;
@@ -14,8 +15,16 @@ class RickMortyRoutes {
   }
 
   intializeRoutes() {
-    this.router.get("/", this.rickMortyController.welcome);
-    this.router.post("/insert", validationMiddleware(InsertRickMortyDto,'body'),this.rickMortyController.insertRickAndMortys);
+    this.router.get(
+      "/",
+      validationMiddleware(GetRickMortyDto, "query"),
+      this.rickMortyController.selectRickAndMortys
+    );
+    this.router.post(
+      "/insert",
+      validationMiddleware(InsertRickMortyDto, "body"),
+      this.rickMortyController.insertRickAndMortys
+    );
   }
 }
 

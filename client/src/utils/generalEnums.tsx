@@ -13,3 +13,6 @@ export enum Roles{
     NON_ADMIN = "nonadmin",
     UNAUTHORISED = "unauthorised",
 }
+export enum ApiRoutes{
+    SELECT_RICKMORTY = "/rickandmorty/",
+}

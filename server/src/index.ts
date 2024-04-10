@@ -1,10 +1,10 @@
 import express from "express";
 import cors, { CorsOptions } from "cors";
 import Routes from "./routes";
-import { SERVER_URL } from "./config";
+import { CLIENT_URL, SERVER_URL } from "./config";
 import { dbConnection } from "./database";
 import { connect, disconnect } from "mongoose";
-import errorMiddleware from "./middlewears/error";
+import errorMiddleware from "./middlewears/error.middlewear";
 import { logMessage } from "./utils/logger";
 import { HttpException } from "./exceptions/HttpException";
 
@@ -22,7 +22,7 @@ export default class Server {
 
   private initMiddlewears(): void {
     const corsOptions: CorsOptions = {
-      origin: SERVER_URL,
+      origin: [CLIENT_URL, SERVER_URL],
     };
 
     this.app.use(cors(corsOptions));
